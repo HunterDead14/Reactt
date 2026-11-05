@@ -20,16 +20,38 @@ https://denysmatsevych.github.io/web-development-2026/react/labs/lab-2/
 
 ## Дерево рендерингу
 
-Заповніть за вкладкою **Components ⚛** у React DevTools (§4.6).
+За вкладкою **Components ⚛** у React DevTools (§4.6).
 
 ```text
 App
+├── Header
+├── Card «Тімлід»
+│   └── Avatar          size={120}
+└── Card «Команда»
+    ├── Profile         key=1
+    │   └── Avatar
+    ├── Profile         key=2
+    │   └── Avatar
+    ├── Profile         key=3
+    │   └── Avatar
+    └── Profile         key=4
+        └── Avatar
 ```
 
 ## Дерево залежностей модулів
 
-Заповніть за рядками `import` у файлах `src/` (§4.6).
+За рядками `import` у файлах `src/` (§4.6). Пакети `react` і `react-dom`
+не показано. `Avatar.jsx` імпортують два модулі, тому він стоїть під
+кожним із них.
 
 ```text
 main.jsx
+├── index.css
+└── App.jsx
+    ├── components/Header.jsx
+    ├── components/Avatar.jsx
+    ├── components/Profile.jsx
+    │   └── components/Avatar.jsx
+    ├── components/Card.jsx
+    └── data.js
 ```
