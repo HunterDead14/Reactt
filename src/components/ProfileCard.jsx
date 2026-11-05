@@ -7,7 +7,7 @@ export default function ProfileCard({ name, group, technologies }) {
     <article className="profile-card">
       <p className="profile-card__group">Група {group}</p>
       <h1 className="profile-card__name">{name}</h1>
-      <p className="profile-card__role">Майбутній frontend-розробник</p>
+      <p className="profile-card__role">Хочу навчитися технологіям</p>
 
       <section className="profile-card__section">
         <h2 className="profile-card__heading">Про мене</h2>
