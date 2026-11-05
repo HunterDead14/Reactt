@@ -30,7 +30,7 @@ App
 └── Card «Команда»
     ├── Profile         key=1
     │   ├── Avatar
-    │   └── Badge       «Тімлідка» (лише для isLead)
+    │   └── Badge       «Тімлід» (лише для isLead)
     ├── Profile         key=2
     │   └── Avatar
     ├── Profile         key=3

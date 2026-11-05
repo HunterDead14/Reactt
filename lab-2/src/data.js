@@ -1,27 +1,27 @@
 export const team = [
   {
     id: 1,
-    name: 'Олена Коваль',
-    role: 'Тімлідка, frontend',
-    photo: '/avatars/olena.svg',
+    name: 'Ільчук Микола',
+    role: 'Тімлід, frontend',
+    photo: '/avatars/mykola.svg',
     isLead: true,
   },
   {
     id: 2,
-    name: 'Андрій Мельник',
+    name: 'Дарина Ковальчук',
     role: 'Backend',
-    photo: '/avatars/andrii.svg',
+    photo: '/avatars/daryna.svg',
   },
   {
     id: 3,
-    name: 'Ірина Бондар',
+    name: 'Остап Гриценко',
     role: 'UI/UX-дизайн',
-    photo: '/avatars/iryna.svg',
+    photo: '/avatars/ostap.svg',
   },
   {
     id: 4,
-    name: 'Максим Ткаченко',
+    name: 'Соломія Левченко',
     role: 'Тестування (QA)',
-    photo: '/avatars/maksym.svg',
+    photo: '/avatars/solomiia.svg',
   },
 ]

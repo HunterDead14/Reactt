@@ -7,7 +7,7 @@ export default function Profile({ person }) {
       <Avatar person={person} />
       <h3>{person.name}</h3>
       <p>{person.role}</p>
-      {person.isLead && <Badge>Тімлідка</Badge>}
+      {person.isLead && <Badge>Тімлід</Badge>}
     </article>
   )
 }
