@@ -29,7 +29,8 @@ App
 │   └── Avatar          size={120}
 └── Card «Команда»
     ├── Profile         key=1
-    │   └── Avatar
+    │   ├── Avatar
+    │   └── Badge       «Тімлідка» (лише для isLead)
     ├── Profile         key=2
     │   └── Avatar
     ├── Profile         key=3
@@ -51,7 +52,8 @@ main.jsx
     ├── components/Header.jsx
     ├── components/Avatar.jsx
     ├── components/Profile.jsx
-    │   └── components/Avatar.jsx
+    │   ├── components/Avatar.jsx
+    │   └── components/Badge.jsx
     ├── components/Card.jsx
     └── data.js
 ```
