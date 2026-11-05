@@ -1,16 +1,28 @@
-# React + Vite
+# react-labs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Лабораторні роботи з курсу «Розробка вебзастосунків на React».
 
-Currently, two official plugins are available:
+- `lab-1/` — налаштування середовища: Node.js, Vite, ESLint, Prettier,
+  картка «Про мене».
+- `lab-2/` — компоненти, дерево компонентів і пропси: сторінка «Команда
+  проєкту».
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Команди
 
-## React Compiler
+Залежності встановлюються один раз у корені репозиторію:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+```
 
-## Expanding the ESLint configuration
+Далі команди виконуються в теці потрібної лабораторної:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+cd lab-1
+npm run dev
+npm run lint
+npm run format:check
+npm run build
+```
+
+Те саме для `lab-2/`.

@@ -1,11 +1,18 @@
 # AGENTS.md
 
-A single-page app on React 19 and Vite 8, in JavaScript with JSX. No
-TypeScript yet. User-facing text is in Ukrainian. Node.js 24 LTS, npm 11.
+A repository with two React lab projects: `lab-1/` (environment setup and a
+profile card) and `lab-2/` (components, props and the team page). Both use
+React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet. User-facing
+text is in Ukrainian. Node.js 24 LTS, npm 11.
 
 ## Commands
 
-- `npm install`: install dependencies
+Install dependencies once at the repository root:
+
+- `npm install`: install dependencies for both labs (npm workspaces)
+
+Run the rest inside the lab directory (`cd lab-1` or `cd lab-2`):
+
 - `npm run dev`: dev server at http://localhost:5173
 - `npm run lint`: ESLint
 - `npm run format`: format all files with Prettier
@@ -13,15 +20,20 @@ TypeScript yet. User-facing text is in Ukrainian. Node.js 24 LTS, npm 11.
 - `npm run build`: production build into `dist/`
 
 A task is done only when `npm run lint`, `npm run format:check` and
-`npm run build` pass. Run all three and report their results.
+`npm run build` pass in the lab you changed. Run all three and report their
+results.
 
 ## Project structure
 
-- `index.html`: the page Vite serves; the app mounts into `<div id="root">`
-- `src/main.jsx`: entry point; renders `<App />` inside `<StrictMode>`
-- `src/App.jsx`: root component
-- `src/components/`: one component per file, named in PascalCase
-  (`ProfileCard.jsx`)
+- `lab-1/index.html`: the page Vite serves; the app mounts into `<div id="root">`
+- `lab-1/src/main.jsx`: entry point; renders `<App />` inside `<StrictMode>`
+- `lab-1/src/App.jsx`: root component
+- `lab-2/index.html`: the page Vite serves for lab 2
+- `lab-2/src/main.jsx`: entry point for lab 2
+- `lab-2/src/App.jsx`: root component of the team page
+- `lab-2/src/data.js`: the `team` array
+- `lab-2/src/components/`: one component per file, named in PascalCase
+  (`Header.jsx`, `Avatar.jsx`, `Profile.jsx`, `Card.jsx`)
 - `public/`: static files, copied to the build as is
 
 ## React rules
@@ -35,6 +47,7 @@ A task is done only when `npm run lint`, `npm run format:check` and
 - Keep rendering pure. Compute values from props and state during render
   instead of copying them into state with `useEffect`.
 - Give list items a stable `key` from the data, never the array index.
+- Read props with destructuring in the function parameter.
 - Use semantic HTML: `<button>` for actions, `<a href>` for navigation, a
   `<label>` for every form field, `alt` on every `<img>`.
 - Don't use `dangerouslySetInnerHTML`.
