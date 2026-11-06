@@ -1,15 +1,23 @@
 # AGENTS.md
 
 A repository with two React lab projects: `lab-1/` (environment setup and a
-profile card) and `lab-2/` (components, props and the team page). Both use
-React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet. User-facing
-text is in Ukrainian. Node.js 24 LTS, npm 11.
+profile card) and `lab-2/` (components, props and the team page). Each lab is
+a separate Vite app on React 19 and Vite 8, in JavaScript with JSX. No
+TypeScript yet. User-facing text is in Ukrainian. Node.js 24 LTS, npm 11.
+
+## Scope
+
+- Work only in the lab directory named in the task (`lab-1/` or `lab-2/`).
+  Don't change the other lab or root configuration files unless the task is
+  about them.
+- If a task touches root files, change only the files it names and list the
+  other root files in the report.
 
 ## Commands
 
 Install dependencies once at the repository root:
 
-- `npm install`: install dependencies for both labs (npm workspaces)
+- `npm install`: install dependencies for all labs (npm workspaces)
 
 Run the rest inside the lab directory (`cd lab-1` or `cd lab-2`):
 
@@ -27,14 +35,14 @@ results.
 
 - `lab-1/index.html`: the page Vite serves; the app mounts into `<div id="root">`
 - `lab-1/src/main.jsx`: entry point; renders `<App />` inside `<StrictMode>`
-- `lab-1/src/App.jsx`: root component
+- `lab-1/src/App.jsx`: root component with the profile card
 - `lab-2/index.html`: the page Vite serves for lab 2
 - `lab-2/src/main.jsx`: entry point for lab 2
 - `lab-2/src/App.jsx`: root component of the team page
 - `lab-2/src/data.js`: the `team` array
-- `lab-2/src/components/`: one component per file, named in PascalCase
-  (`Header.jsx`, `Avatar.jsx`, `Profile.jsx`, `Card.jsx`)
-- `public/`: static files, copied to the build as is
+- `lab-1/src/components/`, `lab-2/src/components/`: one component per file,
+  named in PascalCase (`ProfileCard.jsx`, `Header.jsx`, `Avatar.jsx`)
+- `lab-*/public/`: static files, copied to the build as is
 
 ## React rules
 
