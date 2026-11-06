@@ -2,5 +2,5 @@
   "name": "react-labs",
   "private": true,
   "version": "1.0.0",
-  "workspaces": ["lab-1", "lab-2"]
+  "workspaces": ["lab-*"]
 }
