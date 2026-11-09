@@ -1,15 +1,16 @@
 # AGENTS.md
 
-A repository with two React lab projects: `lab-1/` (environment setup and a
-profile card) and `lab-2/` (components, props and the team page). Each lab is
-a separate Vite app on React 19 and Vite 8, in JavaScript with JSX. No
-TypeScript yet. User-facing text is in Ukrainian. Node.js 24 LTS, npm 11.
+A repository with three React lab projects: `lab-1/` (environment setup and a
+profile card), `lab-2/` (components, props and the team page) and `lab-3/`
+(component-tree refactoring and the coffee menu page). Each lab is a separate
+Vite app on React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet.
+User-facing text is in Ukrainian. Node.js 24 LTS, npm 11.
 
 ## Scope
 
-- Work only in the lab directory named in the task (`lab-1/` or `lab-2/`).
-  Don't change the other lab or root configuration files unless the task is
-  about them.
+- Work only in the lab directory named in the task (`lab-1/`, `lab-2/` or
+  `lab-3/`). Don't change the other lab or root configuration files unless the
+  task is about them.
 - If a task touches root files, change only the files it names and list the
   other root files in the report.
 
@@ -19,7 +20,7 @@ Install dependencies once at the repository root:
 
 - `npm install`: install dependencies for all labs (npm workspaces)
 
-Run the rest inside the lab directory (`cd lab-1` or `cd lab-2`):
+Run the rest inside the lab directory (`cd lab-1`, `cd lab-2` or `cd lab-3`):
 
 - `npm run dev`: dev server at http://localhost:5173
 - `npm run lint`: ESLint
@@ -40,8 +41,13 @@ results.
 - `lab-2/src/main.jsx`: entry point for lab 2
 - `lab-2/src/App.jsx`: root component of the team page
 - `lab-2/src/data.js`: the `team` array
-- `lab-1/src/components/`, `lab-2/src/components/`: one component per file,
-  named in PascalCase (`ProfileCard.jsx`, `Header.jsx`, `Avatar.jsx`)
+- `lab-3/src/App.jsx`: root component of the coffee menu page
+- `lab-3/src/data.js`: the `menu` array of categories and items
+- `lab-3/src/components/`: `SearchBar`, `MenuTable`, `MenuCategory` and
+  `MenuItemRow`
+- `lab-1/src/components/`, `lab-2/src/components/`, `lab-3/src/components/`:
+  one component per file, named in PascalCase (`ProfileCard.jsx`,
+  `Header.jsx`, `Avatar.jsx`)
 - `lab-*/public/`: static files, copied to the build as is
 
 ## React rules
