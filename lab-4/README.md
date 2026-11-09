@@ -30,11 +30,27 @@ React. GitHub показує цей блок діаграмою; перевір�
 
 ```mermaid
 flowchart TD
-  App -->|"filterText, inStockOnly"| SearchBar
-  App -->|"menu, filterText, inStockOnly"| MenuTable
+  App -->|menu| FilterableMenuTable
+  FilterableMenuTable -->|"filterText, inStockOnly"| SearchBar
+  FilterableMenuTable -->|"menu, filterText, inStockOnly"| MenuTable
   App --> CafeInfo
   MenuTable -->|"category"| MenuCategory["MenuCategory × 3"]
   MenuCategory -->|"item"| MenuItemRow["MenuItemRow × 4, 3, 3"]
-  SearchBar -.->|"onFilterTextChange, onInStockOnlyChange"| App
-  App -.->|"menu.filterText, menu.inStockOnly"| LocalStorage[("localStorage")]
+  SearchBar -.->|"onFilterTextChange, onInStockOnlyChange"| FilterableMenuTable
+  FilterableMenuTable -.->|"menu.filterText, menu.inStockOnly"| LocalStorage[("localStorage")]
 ```
+
+## Колокація стану
+
+Під час введення тексту в поле пошуку з увімкненим у React DevTools
+**Highlight updates when components render** рамкою обводилися компоненти:
+
+**До:** `App`, `SearchBar`, `MenuTable`, `MenuCategory` (усі видимі),
+`MenuItemRow` (усі видимі), `CafeInfo`.
+
+**Після:** `FilterableMenuTable`, `SearchBar`, `MenuTable`,
+`MenuCategory` (усі видимі), `MenuItemRow` (усі видимі).
+
+Після перенесення стану `App` і `CafeInfo` більше не рендеряться під час
+введення тексту: стан фільтрів тепер належить `FilterableMenuTable`, а
+`App` лише передає йому `menu`.
