@@ -1,17 +1,18 @@
 # AGENTS.md
 
-A repository with four React lab projects: `lab-1/` (environment setup and a
+A repository with five React lab projects: `lab-1/` (environment setup and a
 profile card), `lab-2/` (components, props and the team page), `lab-3/`
-(component-tree refactoring and the coffee menu page) and `lab-4/` (state,
-effects and the filterable coffee menu). Each lab is a separate Vite app on
+(component-tree refactoring and the coffee menu page), `lab-4/` (state,
+effects and the filterable coffee menu) and `lab-5/` (form events,
+controlled and uncontrolled components). Each lab is a separate Vite app on
 React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet. User-facing
 text is in Ukrainian. Node.js 24 LTS, npm 11.
 
 ## Scope
 
 - Work only in the lab directory named in the task (`lab-1/`, `lab-2/`,
-  `lab-3/` or `lab-4/`). Don't change the other lab or root configuration
-  files unless the task is about them.
+  `lab-3/`, `lab-4/` or `lab-5/`). Don't change the other lab or root
+  configuration files unless the task is about them.
 - If a task touches root files, change only the files it names and list the
   other root files in the report.
 
@@ -21,8 +22,8 @@ Install dependencies once at the repository root:
 
 - `npm install`: install dependencies for all labs (npm workspaces)
 
-Run the rest inside the lab directory (`cd lab-1`, `cd lab-2`, `cd lab-3` or
-`cd lab-4`):
+Run the rest inside the lab directory (`cd lab-1`, `cd lab-2`, `cd lab-3`,
+`cd lab-4` or `cd lab-5`):
 
 - `npm run dev`: dev server at http://localhost:5173
 - `npm run lint`: ESLint
@@ -47,12 +48,17 @@ results.
 - `lab-3/src/data.js`: the `menu` array of categories and items
 - `lab-3/src/components/`: `SearchBar`, `MenuTable`, `MenuCategory` and
   `MenuItemRow`
-- `lab-4/src/App.jsx`: root component with the filter state and effect
+- `lab-4/src/App.jsx`: root component that renders the header,
+  `FilterableMenuTable` and `CafeInfo`
 - `lab-4/src/filterMenu.js`: the pure `filterMenu` function
-- `lab-4/src/components/`: the lab 3 components plus `CafeInfo`
+- `lab-4/src/components/`: the lab 3 components plus `CafeInfo` and
+  `FilterableMenuTable`
+- `lab-5/src/App.jsx`: root component of the booking page
+- `lab-5/src/describeBooking.js`: builds the confirmation text
+- `lab-5/src/components/`: `BookingForm` and `GuestsStepper`
 - `lab-1/src/components/`, `lab-2/src/components/`, `lab-3/src/components/`,
-  `lab-4/src/components/`: one component per file, named in PascalCase
-  (`ProfileCard.jsx`, `Header.jsx`, `Avatar.jsx`)
+  `lab-4/src/components/`, `lab-5/src/components/`: one component per file,
+  named in PascalCase (`ProfileCard.jsx`, `Header.jsx`, `Avatar.jsx`)
 - `lab-*/public/`: static files, copied to the build as is
 
 ## React rules
