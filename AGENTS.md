@@ -1,19 +1,20 @@
 # AGENTS.md
 
-A repository with six React lab projects (labs 1–5 and 7): `lab-1/`
+A repository with seven React lab projects (labs 1–5, 7 and 8): `lab-1/`
 (environment setup and a profile card), `lab-2/` (components, props and the
 team page), `lab-3/` (component-tree refactoring and the coffee menu page),
 `lab-4/` (state, effects and the filterable coffee menu), `lab-5/` (form
-events, controlled and uncontrolled components) and `lab-7/` (custom hooks,
-container/presentational components and render props). Each lab is a separate
-Vite app on React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet.
+events, controlled and uncontrolled components), `lab-7/` (custom hooks,
+container/presentational components and render props) and `lab-8/` (compound
+components, context, accessible tabs and HOCs). Each lab is a separate Vite
+app on React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet.
 User-facing text is in Ukrainian. Node.js 24 LTS, npm 11.
 
 ## Scope
 
 - Work only in the lab directory named in the task (`lab-1/`, `lab-2/`,
-  `lab-3/`, `lab-4/`, `lab-5/` or `lab-7/`). Don't change the other lab or
-  root configuration files unless the task is about them.
+  `lab-3/`, `lab-4/`, `lab-5/`, `lab-7/` or `lab-8/`). Don't change the
+  other lab or root configuration files unless the task is about them.
 - If a task touches root files, change only the files it names and list the
   other root files in the report.
 
@@ -24,7 +25,7 @@ Install dependencies once at the repository root:
 - `npm install`: install dependencies for all labs (npm workspaces)
 
 Run the rest inside the lab directory (`cd lab-1`, `cd lab-2`, `cd lab-3`,
-`cd lab-4`, `cd lab-5` or `cd lab-7`):
+`cd lab-4`, `cd lab-5`, `cd lab-7` or `cd lab-8`):
 
 - `npm run dev`: dev server at http://localhost:5173
 - `npm run lint`: ESLint
@@ -61,6 +62,10 @@ results.
 - `lab-7/src/hooks/`: `useLocalStorage`, `useCountdown` and `useShowMore`
 - `lab-7/src/components/`: page components plus `TimerView` and `ShowMore`
 - `lab-7/tests/`: the provided Vitest and React Testing Library tests
+- `lab-8/src/App.jsx`: root component with the product card and tabs
+- `lab-8/src/components/Tabs.jsx`: the compound `Tabs` component
+- `lab-8/src/hoc/withAnalytics.jsx`: the `withAnalytics` higher-order component
+- `lab-8/tests/`: the provided Vitest and React Testing Library tests
 - `lab-*/src/components/`: one component per file, named in PascalCase
   (`ProfileCard.jsx`, `Header.jsx`, `Avatar.jsx`)
 - `lab-*/public/`: static files, copied to the build as is
