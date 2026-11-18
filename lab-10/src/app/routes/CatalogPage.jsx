@@ -1,5 +1,6 @@
-import BeanCard from '../../shared/BeanCard.jsx'
-import { beans } from '../../shared/beans.js'
+import AddToCartButton from '../../features/cart/components/AddToCartButton.jsx'
+import BeanCard from '../../features/catalog/components/BeanCard.jsx'
+import { beans } from '../../features/catalog/data/beans.js'
 
 export default function CatalogPage() {
   return (
@@ -10,7 +11,9 @@ export default function CatalogPage() {
         <ul className="bean-grid">
           {beans.map((bean) => (
             <li key={bean.id}>
-              <BeanCard bean={bean} />
+              <BeanCard bean={bean}>
+                <AddToCartButton bean={bean} />
+              </BeanCard>
             </li>
           ))}
         </ul>
