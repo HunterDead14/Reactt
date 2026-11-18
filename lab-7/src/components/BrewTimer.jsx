@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { formatTime } from '../formatTime.js'
+import TimerView from './TimerView.jsx'
 
 export default function BrewTimer({ method }) {
   const [secondsLeft, setSecondsLeft] = useState(method.seconds)
@@ -12,30 +12,26 @@ export default function BrewTimer({ method }) {
     }, 1000)
   }, [isRunning])
 
+  const status =
+    secondsLeft === 0
+      ? 'done'
+      : isRunning
+        ? 'running'
+        : secondsLeft === method.seconds
+          ? 'idle'
+          : 'paused'
+
   return (
-    <article className="brew-timer" aria-labelledby={`${method.id}-title`}>
-      <h3 id={`${method.id}-title`}>{method.name}</h3>
-      <p>{method.recipe}</p>
-      <p className="time" role="timer">
-        {formatTime(secondsLeft)}
-      </p>
-      <div className="timer-controls">
-        <button type="button" onClick={() => setIsRunning(true)}>
-          Старт
-        </button>
-        <button type="button" onClick={() => setIsRunning(false)}>
-          Пауза
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setIsRunning(false)
-            setSecondsLeft(method.seconds)
-          }}
-        >
-          Скинути
-        </button>
-      </div>
-    </article>
+    <TimerView
+      method={method}
+      secondsLeft={secondsLeft}
+      status={status}
+      onStart={() => setIsRunning(true)}
+      onPause={() => setIsRunning(false)}
+      onReset={() => {
+        setIsRunning(false)
+        setSecondsLeft(method.seconds)
+      }}
+    />
   )
 }
