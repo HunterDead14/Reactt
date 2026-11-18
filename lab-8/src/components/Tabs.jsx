@@ -1,4 +1,4 @@
-import { createContext, use, useState } from 'react'
+import { createContext, use, useId, useState } from 'react'
 
 const TabsContext = createContext(null)
 
@@ -10,28 +10,81 @@ function useTabsContext(componentName) {
   return context
 }
 
+function getIds(baseId, value) {
+  const suffix = String(value)
+  return {
+    tabId: `${baseId}-tab-${suffix}`,
+    panelId: `${baseId}-panel-${suffix}`,
+  }
+}
+
 function TabsList(props) {
   useTabsContext('Tabs.List')
-  return <div className="tab-list" {...props} />
+  return <div role="tablist" className="tab-list" {...props} />
 }
 
 function TabsTab({ value, ...props }) {
-  const { selected, setSelected } = useTabsContext('Tabs.Tab')
+  const { selected, setSelected, baseId } = useTabsContext('Tabs.Tab')
+  const { tabId, panelId } = getIds(baseId, value)
+  const isSelected = selected === value
+
+  function handleKeyDown(event) {
+    if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) {
+      return
+    }
+
+    event.preventDefault()
+
+    const tabList = event.currentTarget.closest('[role="tablist"]')
+    const tabs = Array.from(tabList?.querySelectorAll('[role="tab"]') ?? [])
+    const currentIndex = tabs.indexOf(event.currentTarget)
+    if (currentIndex === -1) return
+
+    let nextIndex = currentIndex
+    if (event.key === 'ArrowRight') {
+      nextIndex = (currentIndex + 1) % tabs.length
+    } else if (event.key === 'ArrowLeft') {
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length
+    } else if (event.key === 'Home') {
+      nextIndex = 0
+    } else if (event.key === 'End') {
+      nextIndex = tabs.length - 1
+    }
+
+    const nextTab = tabs[nextIndex]
+    nextTab.focus()
+    nextTab.click()
+  }
 
   return (
     <button
       type="button"
-      className={selected === value ? 'active' : ''}
+      role="tab"
+      id={tabId}
+      aria-selected={isSelected}
+      aria-controls={panelId}
+      tabIndex={isSelected ? 0 : -1}
       onClick={() => setSelected(value)}
+      onKeyDown={handleKeyDown}
       {...props}
     />
   )
 }
 
 function TabsPanel({ value, ...props }) {
-  const { selected } = useTabsContext('Tabs.Panel')
+  const { selected, baseId } = useTabsContext('Tabs.Panel')
+  const { tabId, panelId } = getIds(baseId, value)
 
-  return <div hidden={selected !== value} {...props} />
+  return (
+    <div
+      role="tabpanel"
+      id={panelId}
+      aria-labelledby={tabId}
+      tabIndex={0}
+      hidden={selected !== value}
+      {...props}
+    />
+  )
 }
 
 /**
@@ -54,9 +107,10 @@ function TabsPanel({ value, ...props }) {
  */
 export default function Tabs({ defaultValue, children }) {
   const [selected, setSelected] = useState(defaultValue)
+  const baseId = useId()
 
   return (
-    <TabsContext value={{ selected, setSelected }}>
+    <TabsContext value={{ selected, setSelected, baseId }}>
       <div className="tabs">{children}</div>
     </TabsContext>
   )
