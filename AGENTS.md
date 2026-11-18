@@ -1,18 +1,19 @@
 # AGENTS.md
 
-A repository with five React lab projects: `lab-1/` (environment setup and a
-profile card), `lab-2/` (components, props and the team page), `lab-3/`
-(component-tree refactoring and the coffee menu page), `lab-4/` (state,
-effects and the filterable coffee menu) and `lab-5/` (form events,
-controlled and uncontrolled components). Each lab is a separate Vite app on
-React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet. User-facing
-text is in Ukrainian. Node.js 24 LTS, npm 11.
+A repository with six React lab projects (labs 1–5 and 7): `lab-1/`
+(environment setup and a profile card), `lab-2/` (components, props and the
+team page), `lab-3/` (component-tree refactoring and the coffee menu page),
+`lab-4/` (state, effects and the filterable coffee menu), `lab-5/` (form
+events, controlled and uncontrolled components) and `lab-7/` (custom hooks,
+container/presentational components and render props). Each lab is a separate
+Vite app on React 19 and Vite 8, in JavaScript with JSX. No TypeScript yet.
+User-facing text is in Ukrainian. Node.js 24 LTS, npm 11.
 
 ## Scope
 
 - Work only in the lab directory named in the task (`lab-1/`, `lab-2/`,
-  `lab-3/`, `lab-4/` or `lab-5/`). Don't change the other lab or root
-  configuration files unless the task is about them.
+  `lab-3/`, `lab-4/`, `lab-5/` or `lab-7/`). Don't change the other lab or
+  root configuration files unless the task is about them.
 - If a task touches root files, change only the files it names and list the
   other root files in the report.
 
@@ -23,7 +24,7 @@ Install dependencies once at the repository root:
 - `npm install`: install dependencies for all labs (npm workspaces)
 
 Run the rest inside the lab directory (`cd lab-1`, `cd lab-2`, `cd lab-3`,
-`cd lab-4` or `cd lab-5`):
+`cd lab-4`, `cd lab-5` or `cd lab-7`):
 
 - `npm run dev`: dev server at http://localhost:5173
 - `npm run lint`: ESLint
@@ -56,9 +57,12 @@ results.
 - `lab-5/src/App.jsx`: root component of the booking page
 - `lab-5/src/describeBooking.js`: builds the confirmation text
 - `lab-5/src/components/`: `BookingForm` and `GuestsStepper`
-- `lab-1/src/components/`, `lab-2/src/components/`, `lab-3/src/components/`,
-  `lab-4/src/components/`, `lab-5/src/components/`: one component per file,
-  named in PascalCase (`ProfileCard.jsx`, `Header.jsx`, `Avatar.jsx`)
+- `lab-7/src/App.jsx`: root component of the coffee beans page
+- `lab-7/src/hooks/`: `useLocalStorage`, `useCountdown` and `useShowMore`
+- `lab-7/src/components/`: page components plus `TimerView` and `ShowMore`
+- `lab-7/tests/`: the provided Vitest and React Testing Library tests
+- `lab-*/src/components/`: one component per file, named in PascalCase
+  (`ProfileCard.jsx`, `Header.jsx`, `Avatar.jsx`)
 - `lab-*/public/`: static files, copied to the build as is
 
 ## React rules
