@@ -1,3 +1,39 @@
+import { createContext, use, useState } from 'react'
+
+const TabsContext = createContext(null)
+
+function useTabsContext(componentName) {
+  const context = use(TabsContext)
+  if (!context) {
+    throw new Error(`${componentName} must be used inside <Tabs>`)
+  }
+  return context
+}
+
+function TabsList(props) {
+  useTabsContext('Tabs.List')
+  return <div className="tab-list" {...props} />
+}
+
+function TabsTab({ value, ...props }) {
+  const { selected, setSelected } = useTabsContext('Tabs.Tab')
+
+  return (
+    <button
+      type="button"
+      className={selected === value ? 'active' : ''}
+      onClick={() => setSelected(value)}
+      {...props}
+    />
+  )
+}
+
+function TabsPanel({ value, ...props }) {
+  const { selected } = useTabsContext('Tabs.Panel')
+
+  return <div hidden={selected !== value} {...props} />
+}
+
 /**
  * Вкладки — складений компонент (compound component): `Tabs` і його частини
  * `Tabs.List`, `Tabs.Tab` і `Tabs.Panel`. Вміст кожної частини приходить між
@@ -16,6 +52,16 @@
  *
  * Вимоги — у тестах tests/Tabs.children.test.jsx і tests/Tabs.a11y.test.jsx.
  */
-export default function Tabs() {
-  throw new Error('Not implemented: Tabs')
+export default function Tabs({ defaultValue, children }) {
+  const [selected, setSelected] = useState(defaultValue)
+
+  return (
+    <TabsContext value={{ selected, setSelected }}>
+      <div className="tabs">{children}</div>
+    </TabsContext>
+  )
 }
+
+Tabs.List = TabsList
+Tabs.Tab = TabsTab
+Tabs.Panel = TabsPanel
