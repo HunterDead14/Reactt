@@ -1,3 +1,4 @@
+import { produce } from 'immer'
 import { defaultMilk } from '../data/menu.js'
 
 /**
@@ -37,65 +38,51 @@ export const emptyDraft = Object.freeze({
  *
  * Невідома дія — помилка, у тексті якої є назва дії.
  *
- * Вимоги — у тестах tests/draftReducer.test.js і tests/OrderComposer.test.jsx.
+ * Ред'юсер записано через curried produce з Immer: функція змінює чернетку
+ * (draft) звичайними присвоєннями, а Immer будує з цих змін новий стан,
+ * копіюючи лише змінений шлях. Стан, який отримав ред'юсер, не змінюється.
  */
-
-/**
- * Повертає нову чернетку, у якій змінено лише напій itemId. Решта напоїв —
- * ті самі об'єкти, тож структурне спільне використання зберігається.
- */
-function updateItem(state, itemId, update) {
-  return {
-    ...state,
-    items: state.items.map((item) =>
-      item.id === itemId ? update(item) : item,
-    ),
-  }
-}
-
-export function draftReducer(state, action) {
+export const draftReducer = produce((draft, action) => {
   switch (action.type) {
     case 'customer_changed':
-      return { ...state, customerName: action.name }
+      draft.customerName = action.name
+      break
     case 'drink_added':
-      return {
-        ...state,
-        items: [
-          ...state.items,
-          {
-            id: action.id,
-            drink: action.drink,
-            size: 'M',
-            milk: defaultMilk(action.drink),
-            syrups: [],
-          },
-        ],
+      draft.items.push({
+        id: action.id,
+        drink: action.drink,
+        size: 'M',
+        milk: defaultMilk(action.drink),
+        syrups: [],
+      })
+      break
+    case 'size_chosen': {
+      const item = draft.items.find((i) => i.id === action.itemId)
+      if (item) item.size = action.size
+      break
+    }
+    case 'milk_chosen': {
+      const item = draft.items.find((i) => i.id === action.itemId)
+      if (item) item.milk = action.milk
+      break
+    }
+    case 'syrup_toggled': {
+      const item = draft.items.find((i) => i.id === action.itemId)
+      if (item) {
+        const index = item.syrups.indexOf(action.syrup)
+        if (index === -1) item.syrups.push(action.syrup)
+        else item.syrups.splice(index, 1)
       }
-    case 'size_chosen':
-      return updateItem(state, action.itemId, (item) => ({
-        ...item,
-        size: action.size,
-      }))
-    case 'milk_chosen':
-      return updateItem(state, action.itemId, (item) => ({
-        ...item,
-        milk: action.milk,
-      }))
-    case 'syrup_toggled':
-      return updateItem(state, action.itemId, (item) => ({
-        ...item,
-        syrups: item.syrups.includes(action.syrup)
-          ? item.syrups.filter((syrup) => syrup !== action.syrup)
-          : [...item.syrups, action.syrup],
-      }))
+      break
+    }
     case 'item_removed':
-      return {
-        ...state,
-        items: state.items.filter((item) => item.id !== action.itemId),
-      }
+      draft.items = draft.items.filter((item) => item.id !== action.itemId)
+      break
     case 'draft_cleared':
-      return emptyDraft
+      draft.customerName = ''
+      draft.items = []
+      break
     default:
       throw new Error(`Unknown action: ${action.type}`)
   }
-}
+})
