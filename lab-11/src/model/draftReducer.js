@@ -1,3 +1,5 @@
+import { defaultMilk } from '../data/menu.js'
+
 /**
  * Чернетка нового замовлення — стан форми «Нове замовлення»:
  *   { customerName: 'Оля', items: [{ id, drink, size, milk, syrups }] }
@@ -35,9 +37,65 @@ export const emptyDraft = Object.freeze({
  *
  * Невідома дія — помилка, у тексті якої є назва дії.
  *
- * Поки що кидає помилку. Вимоги — у тестах tests/draftReducer.test.js і
- * tests/OrderComposer.test.jsx.
+ * Вимоги — у тестах tests/draftReducer.test.js і tests/OrderComposer.test.jsx.
  */
-export function draftReducer(/* state, action */) {
-  throw new Error('Not implemented: draftReducer')
+
+/**
+ * Повертає нову чернетку, у якій змінено лише напій itemId. Решта напоїв —
+ * ті самі об'єкти, тож структурне спільне використання зберігається.
+ */
+function updateItem(state, itemId, update) {
+  return {
+    ...state,
+    items: state.items.map((item) =>
+      item.id === itemId ? update(item) : item,
+    ),
+  }
+}
+
+export function draftReducer(state, action) {
+  switch (action.type) {
+    case 'customer_changed':
+      return { ...state, customerName: action.name }
+    case 'drink_added':
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          {
+            id: action.id,
+            drink: action.drink,
+            size: 'M',
+            milk: defaultMilk(action.drink),
+            syrups: [],
+          },
+        ],
+      }
+    case 'size_chosen':
+      return updateItem(state, action.itemId, (item) => ({
+        ...item,
+        size: action.size,
+      }))
+    case 'milk_chosen':
+      return updateItem(state, action.itemId, (item) => ({
+        ...item,
+        milk: action.milk,
+      }))
+    case 'syrup_toggled':
+      return updateItem(state, action.itemId, (item) => ({
+        ...item,
+        syrups: item.syrups.includes(action.syrup)
+          ? item.syrups.filter((syrup) => syrup !== action.syrup)
+          : [...item.syrups, action.syrup],
+      }))
+    case 'item_removed':
+      return {
+        ...state,
+        items: state.items.filter((item) => item.id !== action.itemId),
+      }
+    case 'draft_cleared':
+      return emptyDraft
+    default:
+      throw new Error(`Unknown action: ${action.type}`)
+  }
 }
